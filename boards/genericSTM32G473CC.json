@@ -1,0 +1,39 @@
+{
+  "build": {
+    "core": "stm32",
+    "cpu": "cortex-m4",
+    "extra_flags": "-DSTM32G4 -DSTM32G4xx",
+    "f_cpu": "160000000L",
+    "mcu": "stm32g473cct6",
+    "product_line": "STM32G473xx"
+  },
+  "connectivity": [
+    "can",
+    "usb"
+  ],
+  "debug": {
+    "default_tools": [
+      "stlink"
+    ],
+    "jlink_device": "STM32G473CC",
+    "openocd_target": "stm32g4x"
+  },
+  "frameworks": [
+    "cmsis",
+    "stm32cube"
+  ],
+  "name": "Custom STM32G473CC (Cortex-M4F, 256K flash, 128K RAM)",
+  "upload": {
+    "maximum_ram_size": 131072,
+    "maximum_size": 262144,
+    "protocol": "stlink",
+    "protocols": [
+      "stlink",
+      "cmsis-dap",
+      "jlink",
+      "blackmagic"
+    ]
+  },
+  "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32g473cc.html",
+  "vendor": "ST"
+}
