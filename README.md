@@ -9,7 +9,7 @@ candleLight adapters. On Linux it shows up as `can0`, `can1` and `can2` with the
 
 - 3 independent CAN FD channels (ISO), each up to 1 Mbit/s nominal and 8 Mbit/s data.
 - Bitrates, FD mode, listen-only, loopback and one-shot are set per channel from the host.
-- Hardware timestamps (1 µs) on every received frame and TX echo.
+- Hardware timestamps (1 us) on every received frame and TX echo.
 - Bus state reporting (warning / passive / bus-off) as SocketCAN error frames. Bus-off
   recovers automatically.
 - Identify: `ethtool -p canX` blinks that channel's LEDs.
@@ -106,36 +106,6 @@ main loop: applies start/stop requests (FDCAN re-init) and drives the LEDs
 USB full speed tops out around 1 MB/s. Three buses saturated at 5 Mbit/s with 64-byte frames
 produce more than that, so very heavy simultaneous traffic on all channels will overflow.
 Typical vehicle loads are well below this.
-
-## Regenerating with STM32CubeMX
-
-The project is generated with the **Makefile** toolchain; PlatformIO builds the same sources.
-After regenerating:
-
-- Application hooks are inside `USER CODE` blocks (`main.c`, `stm32g4xx_it.c`) and survive.
-- The FDCAN1/2/3 IT0 and USB_LP interrupts are enabled in the `.ioc`. Keep FDCAN at
-  priority 1 and USB at priority 2.
-- **TIM2** is used directly by `timestamp.c`. Don't enable it in CubeMX.
-- **CRS** (HSI48 trimming from USB SOF) is enabled in `usb-device.c`, not in the `.ioc`.
-- SPI1, I2C1, USART1 and USART2 are initialised but not used yet (reserved for sensor
-  debugging).
-
-## Git Hooks
-> [!Warning]
-> Make sure to add all the needed directories in TARGET_DIRS
-
-The pre-commit hook formats staged files in `Core/Src/serializer` and `Core/Inc/serializer`
-with clang-format. Generated CubeMX code is left alone.
-
-To setup git hooks in your local repository you will have to execute the following commands:
-
-```sh
-chmod +x hooks/pre-commit
-```
-
-```sh
-git config core.hooksPath hooks/
-```
 
 ## License
 
