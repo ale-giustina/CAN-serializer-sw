@@ -1,6 +1,6 @@
 # CAN serializer
 
-Firmware for the CAN serializer board (STM32G473CC, three MCP2562FD transceivers).
+Firmware for the [CAN serializer board](https://github.com/ale-giustina/CAN-serializer) (STM32G473CC, three MCP2562FD transceivers).
 The board is a 3-channel CAN FD to USB adapter that speaks the **gs_usb** protocol used by
 candleLight adapters. On Linux it shows up as `can0`, `can1` and `can2` with the in-kernel
 `gs_usb` driver. Nothing needs to be installed on the host.
